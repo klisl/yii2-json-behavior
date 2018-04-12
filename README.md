@@ -27,8 +27,8 @@ public function behaviors(): array
     return [
         [
             'class' => JsonBehavior::class,
-            'property' => 'data',
-            'jsonField' => 'data_json'
+            'property' => 'meta',
+            'jsonField' => 'meta_json'
         ]
     ];
 }
