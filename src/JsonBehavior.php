@@ -49,13 +49,16 @@ class JsonBehavior extends Behavior
         ];
     }
 
-    public function onAfterFind(Event $event): void
+	public function onAfterFind(Event $event): void
     {
         /** @var ActiveRecord $model */
         $model = $event->sender;
         $jsonField = $this->getJsonField($model);
+        $attribute = $model->getAttribute($jsonField);
 
-        $model->{$this->property} = Json::decode($model->getAttribute($jsonField));
+        if(!is_array($attribute)){
+            $model->{$this->property} = Json::decode($attribute);
+        }
     }
 
     public function onBeforeSave(Event $event): void
